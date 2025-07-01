@@ -12,7 +12,7 @@ Built using a **fine-tuned Cohere classification model** for distortion detectio
 - ✅ **ML-based cognitive distortion detection** (Cohere fine-tuned classification model)  
 - ✅ **Personalized CBT reframes and thought-challenging questions** (Google Gemini API)  
 - ✅ **User reflections saved alongside AI feedback**  
-- ✅ **Mood tracking (1-10 scale slider per entry)**  
+- ✅ **Mood tracking (1-5 scale slider per entry)**  
 - ✅ **User authentication** (Supabase Auth)  
 - ✅ **Per-user journal logs** with:
   - Search by keyword or distortion type
