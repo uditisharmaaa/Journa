@@ -39,21 +39,45 @@ export default function Dashboard() {
 
         if (error) throw error;
 
-        // ✅ Prepare Distortion Chart Data
-        const distortionGrouped = {};
+        // ✅ Step 1: Get all unique distortion types
+        const allDistortions = new Set();
+        data.forEach((log) => {
+          log.detected_distortions.forEach((dist) => allDistortions.add(dist));
+        });
+
+        // ✅ Step 2: Get all unique dates with any journal entry
+        const allDates = new Set();
+        data.forEach((log) => {
+          allDates.add(new Date(log.created_at).toLocaleDateString());
+        });
+
+        // ✅ Step 3: Initialize date-wise distortion counts
+        const dateDistortionCounts = {};
+        allDates.forEach((date) => {
+          dateDistortionCounts[date] = {};
+          allDistortions.forEach((dist) => {
+            dateDistortionCounts[date][dist] = 0;
+          });
+        });
+
+        // ✅ Step 4: Fill counts based on actual distortions per day
         data.forEach((log) => {
           const date = new Date(log.created_at).toLocaleDateString();
           log.detected_distortions.forEach((dist) => {
-            if (!distortionGrouped[date]) distortionGrouped[date] = {};
-            distortionGrouped[date][dist] = (distortionGrouped[date][dist] || 0) + 1;
+            dateDistortionCounts[date][dist] += 1;
           });
         });
-        const formattedDistortions = Object.entries(distortionGrouped).map(
-          ([date, counts]) => ({ date, ...counts })
+
+        // ✅ Step 5: Format for Recharts
+        const formattedDistortions = Object.entries(dateDistortionCounts).map(
+          ([date, counts]) => ({
+            date,
+            ...counts,
+          })
         );
         setDistortionData(formattedDistortions);
 
-        // ✅ Prepare Mood Chart Data
+        // ✅ Mood Data for Line Chart
         const moodPoints = data
           .filter((log) => log.mood !== null && log.mood !== undefined)
           .map((log) => ({
@@ -83,24 +107,27 @@ export default function Dashboard() {
         {distortionData.length === 0 ? (
           <p className="text-gray-500">No distortion data yet. Start journaling!</p>
         ) : (
-<ResponsiveContainer width="100%" height={300}>
-  <BarChart data={distortionData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-    <XAxis dataKey="date" />
-    <YAxis />
-    <Tooltip />
-    <Legend />
-    {Object.keys(distortionData[0])
-      .filter((key) => key !== "date")
-      .map((key, idx) => (
-        <Bar
-          key={key}
-          dataKey={key}
-          fill={`hsl(${(idx * 60) % 360}, 70%, 50%)`}
-          barSize={30}
-        />
-      ))}
-  </BarChart>
-</ResponsiveContainer>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart
+              data={distortionData}
+              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+            >
+              <XAxis dataKey="date" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              {Object.keys(distortionData[0])
+                .filter((key) => key !== "date")
+                .map((key, idx) => (
+                  <Bar
+                    key={key}
+                    dataKey={key}
+                    fill={`hsl(${(idx * 60) % 360}, 70%, 50%)`}
+                    barSize={30}
+                  />
+                ))}
+            </BarChart>
+          </ResponsiveContainer>
         )}
       </div>
 
@@ -115,7 +142,13 @@ export default function Dashboard() {
               <XAxis dataKey="date" />
               <YAxis domain={[1, 5]} tickCount={5} />
               <Tooltip />
-              <Line type="monotone" dataKey="mood" stroke="#facc15" strokeWidth={2} dot={{ r: 4 }} />
+              <Line
+                type="monotone"
+                dataKey="mood"
+                stroke="#facc15"
+                strokeWidth={2}
+                dot={{ r: 4 }}
+              />
             </LineChart>
           </ResponsiveContainer>
         )}
