@@ -17,21 +17,23 @@ Users can speak their thoughts — the Web Speech API transcribes them into jour
 ![Cohere Detection](screenshots/b.png)
 Fine-tuned Cohere model highlights cognitive distortions like Catastrophizing, Emotional Reasoning, etc.
 
-![Cohere Detection](screenshots/c.png)
-![Cohere Detection](screenshots/d.png)
+---
 
 ### 💬 Personalized Reframing Suggestions
+![Cohere Detection](screenshots/c.png)
 Google Gemini generates CBT-style thought-challenging reframes based on your journal.
+
+---
+
+### 📓 Smart Journal Logs  
+![Cohere Detection](screenshots/d.png)
+Journal entries are saved with timestamps, mood ratings, detected distortions, and personalized AI feedback. Users can search entries by keyword or distortion tag, and expand/collapse each log for a clean, focused journaling experience.
 
 ---
 
 ### 📈 Mood Tracker & Analytics Dashboard
 ![Dashboard](screenshots/e.png)
 Visualizations of your cognitive distortion trends and mood over time.
-
----
-
-
 
 ---
 
