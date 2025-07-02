@@ -4,6 +4,35 @@ A full-stack web application that helps users self-reflect using **Cognitive Beh
 
 Built using a **fine-tuned Cohere classification model** for distortion detection and **Google Gemini** for personalized AI reframes.
 
+
+## 📸 Screenshots & Features
+
+### 📝 Speech-to-Text Journaling
+![Speech to Text](./screenshots/a)
+Users can speak their thoughts — the Web Speech API transcribes them into journal entries.
+
+---
+
+### 🤖 AI-Powered Distortion Detection
+![Cohere Detection](./screenshots/cohere-detection.png)
+Fine-tuned Cohere model highlights cognitive distortions like Catastrophizing, Emotional Reasoning, etc.
+
+---
+
+### 💬 Personalized Reframing Suggestions
+![Gemini Suggestions](./screenshots/gemini-reframe.png)
+Google Gemini generates CBT-style thought-challenging reframes based on your journal.
+
+---
+
+### 📈 Mood Tracker & Analytics Dashboard
+![Dashboard](./screenshots/dashboard.png)
+Visualizations of your cognitive distortion trends and mood over time.
+
+---
+
+
+
 ---
 
 ## 🚀 Features
