@@ -8,7 +8,7 @@ Built using a **fine-tuned Cohere classification model** for distortion detectio
 ## 📸 Screenshots & Features
 
 ### 📝 Speech-to-Text Journaling
-![Speech to Text](screenshots/a)
+![Speech to Text](screenshots/a.png)
 Users can speak their thoughts — the Web Speech API transcribes them into journal entries.
 
 ---
